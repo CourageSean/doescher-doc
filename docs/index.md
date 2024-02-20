@@ -1,17 +1,38 @@
-# Welcome to MkDocs
+# Willkommen zu TabulatePlus
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+## Executable Downloads
+Windows: [Link text Here](https://link-url-here.org)
 
-## Commands
+## Lokale Entwicklung
+--------------
+## Voraussetzungen
+Bevor Sie beginnen, stellen Sie sicher, dass die folgenden Voraussetzungen erfüllt sind:
+.NET 7.0 SDK installiert
+Git installiert (für das Klonen des Repositories)
+Anwendung starten
+Folgen Sie diesen Schritten, um die Anwendung zu starten:
+### 1. Repository klonen
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+Öffnen Sie Ihre Kommandozeile oder Terminal und führen Sie den folgenden Befehl aus, um das Repository zu klonen:
 
-## Project layout
+`git clone https://github.com/IhrRepository/AvaloniaApplication.git`
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+### 2. In das Projektverzeichnis wechseln
+
+`cd TabulatePlus`
+
+Wechseln Sie in das Verzeichnis des geklonten Repositories:
+
+### 3. Anwendung bauen
+
+Bauen Sie die Anwendung mit dem .NET CLI-Tool:
+
+`dotnet build`
+
+### 4. Anwendung ausführen
+
+Startetn Sie die Anwendung:
+
+`dotnet run --project AvaloniaApplication`
+
+
