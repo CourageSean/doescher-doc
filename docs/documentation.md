@@ -1,4 +1,4 @@
-# Dokumentation für TabulatePlus
+# Dokumentation für Tabellen-Software
 
 Diese Dokumentation bietet einen Überblick über die Kernkomponenten der AvaloniaApplication, um Entwicklern und Kunden einen schnellen Einstieg und Verständnis der Anwendung zu ermöglichen. Die Anwendung besteht aus verschiedenen Views und ViewModels, die zusammenarbeiten, um die Funktionalität der Anwendung zu realisieren.
 

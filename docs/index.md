@@ -1,4 +1,4 @@
-# Willkommen zu TabulatePlus
+# Willkommen zur Tabellen-Software
 
 ## Executable Downloads
 Windows: [Link text Here](https://link-url-here.org)
@@ -19,7 +19,7 @@ Folgen Sie diesen Schritten, um die Anwendung zu starten:
 
 ### 2. In das Projektverzeichnis wechseln
 
-`cd TabulatePlus`
+`cd Tabellen-Software`
 
 Wechseln Sie in das Verzeichnis des geklonten Repositories:
 
