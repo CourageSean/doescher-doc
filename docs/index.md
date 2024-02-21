@@ -15,7 +15,7 @@ Folgen Sie diesen Schritten, um die Anwendung zu starten:
 
 Öffnen Sie Ihre Kommandozeile oder Terminal und führen Sie den folgenden Befehl aus, um das Repository zu klonen:
 
-`git clone https://github.com/IhrRepository/AvaloniaApplication.git`
+`git clone https://github.com/IhrRepository/Tabellen-Software.git`
 
 ### 2. In das Projektverzeichnis wechseln
 
@@ -33,6 +33,6 @@ Bauen Sie die Anwendung mit dem .NET CLI-Tool:
 
 Startetn Sie die Anwendung:
 
-`dotnet run --project AvaloniaApplication`
+`dotnet run --project Tabellen-Software`
 
 
