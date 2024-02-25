@@ -11,9 +11,9 @@ Diese Dokumentation bietet einen Überblick über die Kernkomponenten der Avalon
 
 AvaloniaUI ist ein plattformübergreifendes Framework für .NET, das die Entwicklung von Desktop-Anwendungen unter Windows, Linux und macOS ermöglicht. Es wird für die Gestaltung der Benutzeroberfläche verwendet.
 
-### .NET 7.0
+### .NET 8.0
 
-Als Basis der Anwendung dient das .NET 7.0 Framework, das eine moderne, leistungsfähige Umgebung für die Entwicklung von Anwendungen bietet.
+Als Basis der Anwendung dient das .NET 8.0 Framework, das eine moderne, leistungsfähige Umgebung für die Entwicklung von Anwendungen bietet.
 CommunityToolkit.Mvvm
 Diese Bibliothek wird für die Implementierung des MVVM (Model-View-ViewModel) Musters verwendet, um eine klare Trennung zwischen der Benutzeroberfläche und der Geschäftslogik zu gewährleisten.
 

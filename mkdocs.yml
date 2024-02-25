@@ -3,6 +3,7 @@ nav:
   - 'index.md'
   - 'documentation.md'
   - 'zeiterfassung.md'
+  - 'tutorial.md'
 theme:
   name: material
   features:

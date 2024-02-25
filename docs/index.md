@@ -7,7 +7,7 @@ Windows: [Link text Here](https://link-url-here.org)
 --------------
 ## Voraussetzungen
 Bevor Sie beginnen, stellen Sie sicher, dass die folgenden Voraussetzungen erfüllt sind:
-.NET 7.0 SDK installiert
+.NET 8.0 SDK installiert
 Git installiert (für das Klonen des Repositories)
 Anwendung starten
 Folgen Sie diesen Schritten, um die Anwendung zu starten:
