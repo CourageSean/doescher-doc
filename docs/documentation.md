@@ -145,25 +145,20 @@ Das ViewModel für die HomePageView, das die Logik für das Hochladen von Verzei
 Ein Service, der Fehlermeldungen basierend auf einem Schlüssel bereitstellt. Wird im HomePageViewModel verwendet, um Benutzerfreundliche Fehlermeldungen anzuzeigen.
 
 ``` c# title="ErrorMessageService.cs"
-    public partial class HomePageViewModel : ViewModelBase
+ public class ErrorMessageService : IErrorMessageService
+{
+    public string GetErrorMessage(string messageKey)
     {
-        private IErrorMessageService _errorMessageService;
-        private string _errorMessage = "";
-        private string _folderPath = "Kein Ordner ausgewählt";
-        private string _notification = "";
-        private bool _isFolderPathValid;
-        private bool _isTableGeneratedSuccessfully = false;
-        private readonly ITableProcessingService _tableProcessingService;
-        private readonly IUserNotificationService _notificationService;
-
-        public HomePageViewModel(ITableProcessingService tableProcessingService, IErrorMessageService errorMessageService)
+        return messageKey switch
         {
-            //SetFolderPathCommand = new RelayCommand<string>(SetFolderPath);
-            _errorMessageService = errorMessageService;
-            _tableProcessingService = tableProcessingService;
-        }
-        [ObservableProperty]
-        private bool _isButtonEnabled = true;
+            "notDirectory" => "Die ausgewählte Datei entspricht keinem Verzeichnis. Bitte wählen Sie ein nicht leeres Verzeichnis aus.",
+            "InvalidFolderPath" => "Verzeichnis fehlt. Bitte auswählen.",
+            // Add more cases here as needed
+            _ => "Unbekannter Fehler"
+        };
+    }
+    
+}
 ``` 
 
 Ein Service, der die Logik für die Verarbeitung von Tabellen enthält. Wird im HomePageViewModel verwendet, um die Hauptlogik der Anwendung auszuführen.
