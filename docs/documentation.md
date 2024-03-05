@@ -9,13 +9,16 @@ Diese Dokumentation bietet einen Überblick über die Kernkomponenten der Avalon
 
 ### AvaloniaUI
 
-AvaloniaUI ist ein plattformübergreifendes Framework für .NET, das die Entwicklung von Desktop-Anwendungen unter Windows, Linux und macOS ermöglicht. Es wird für die Gestaltung der Benutzeroberfläche verwendet.
+Ein plattformübergreifendes Framework für .NET, ideal für die Entwicklung von Desktop-Anwendungen auf verschiedenen Betriebssystemen. Erlaubt eine flexible Gestaltung der Benutzeroberfläche mit XAML und unterstützt das MVVM-Muster für eine saubere Trennung von UI und Business-Logik.
 
 ### .NET 8.0
 
-Als Basis der Anwendung dient das .NET 8.0 Framework, das eine moderne, leistungsfähige Umgebung für die Entwicklung von Anwendungen bietet.
-CommunityToolkit.Mvvm
-Diese Bibliothek wird für die Implementierung des MVVM (Model-View-ViewModel) Musters verwendet, um eine klare Trennung zwischen der Benutzeroberfläche und der Geschäftslogik zu gewährleisten.
+ Bietet eine moderne und leistungsfähige Entwicklungsumgebung. Nutzt aktuelle C#-Features und stellt eine breite Palette von Bibliotheken zur Verfügung, um Entwicklungsprozesse zu optimieren.
+
+
+ ### CommunityToolkit.Mvvm
+ 
+ Vereinfacht die Implementierung des MVVM-Designmusters, unterstützt die Entwicklung wartbarer und testbarer Anwendungen durch die Bereitstellung von Hilfsklassen für Bindings, Commands und ObservableProperties.
 
 ### FluentAvaloniaUI
 
@@ -35,7 +38,7 @@ Eine Erweiterung für die Dependency Injection, die zusätzliche Funktionalität
 ---------
 ## Views
 
-Die Hauptansicht der Anwendung, die als Container für die anderen Views dient. Es verwendet ein SplitView-Layout, um eine Navigationsleiste und den Hauptinhalt zu trennen.
+MainWindow: Die Hauptansicht agiert als Container für die anderen Views und setzt ein SplitView-Layout ein, um eine Navigationsleiste von dem Hauptinhalt zu trennen. Beispielcode demonstriert, wie AvaloniaUI für das Layout verwendet wird.
 
 ``` c# title="MainWindow.axaml"
      <Grid RowDefinitions="Auto, *">
@@ -49,7 +52,7 @@ Die Hauptansicht der Anwendung, die als Container für die anderen Views dient. 
                    DisplayMode="CompactInline"
 ```    
 
-Die Startseite der Anwendung, die als Einstiegspunkt dient. Sie enthält Elemente für die Interaktion mit dem Benutzer, wie das Hochladen von Verzeichnissen und das Anzeigen von Benachrichtigungen.
+HomePageView: Dient als Startpunkt der Anwendung und bietet Benutzern die Möglichkeit, mit der Anwendung zu interagieren, z.B. durch das Hochladen von Dateien. Beispielcode zeigt die Verwendung von Event Bindings und UI-Elementen.
 
 ``` c# title="HomePageView.axaml"
    
@@ -142,7 +145,75 @@ Das ViewModel für die HomePageView, das die Logik für das Hochladen von Verzei
 
 ## Services
 
+### Tabellengenerierung
+
+Die Tabellengenerierung ist ein zentraler Bestandteil der Anwendung, der es Benutzern ermöglicht, aus verschiedenen Datenquellen Tabellen zu erstellen. Der Prozess umfasst typischerweise das Einlesen von Daten, deren Verarbeitung und die Ausgabe in einem strukturierten Format.
+
 Ein Service, der Fehlermeldungen basierend auf einem Schlüssel bereitstellt. Wird im HomePageViewModel verwendet, um Benutzerfreundliche Fehlermeldungen anzuzeigen.
+
+``` c# title="TableProcessingService.cs"
+public class TableProcessingService : ITableProcessingService
+{
+    public Table GenerateTableFromData(IEnumerable<DataPoint> dataPoints)
+    {
+        var table = new Table();
+        // Konfigurieren der Spalten basierend auf den DataPoint-Eigenschaften
+        table.Columns.Add(new Column("ID", typeof(int)));
+        table.Columns.Add(new Column("Wert", typeof(string)));
+        table.Columns.Add(new Column("Datum", typeof(DateTime)));
+
+        // Befüllen der Tabelle mit Daten
+        foreach (var dataPoint in dataPoints)
+        {
+            var row = table.NewRow();
+            row["ID"] = dataPoint.Id;
+            row["Wert"] = dataPoint.Value;
+            row["Datum"] = dataPoint.Timestamp;
+            table.Rows.Add(row);
+        }
+
+        return table;
+    }
+}
+
+
+```
+In diesem Beispiel wird eine einfache Methode innerhalb eines TableProcessingService dargestellt, die eine Tabelle aus einer Sammlung von Datenpunkten erstellt. Es illustriert, wie man eine Tabelle mit Spalten definiert und dann Zeilen mit Daten aus den Datenpunkten hinzufügt.
+
+
+
+### Graphgenerierung
+
+
+Die Graphgenerierung ermöglicht es Benutzern, visuelle Darstellungen ihrer Daten zu erstellen. Dies kann durch die Verwendung von Datenvisualisierungsbibliotheken erfolgen, die in das Projekt integriert sind.
+
+``` c# title="GraphDialogViewModel.cs"
+ public GraphDialogViewModel(IEnumerable<double> pPmaxValues, IEnumerable<double> generatorValues, double startFreq,
+        double stopFreq, string fileName)
+    {
+        double stepSize = (stopFreq - startFreq) / (pPmaxValues.Count() - 1);
+        var pPmaxPoints = pPmaxValues.Select((value, index) => new ObservablePoint(startFreq + index * stepSize, value))
+            .ToArray();
+        var generatorPoints = generatorValues
+            .Select((value, index) => new ObservablePoint(startFreq + index * stepSize, value)).ToArray();
+
+        Series = new ISeries[]
+        {
+            new LineSeries<ObservablePoint>
+            {
+                Values = pPmaxPoints, Name = $"{fileName} - P/Pmax[%]", GeometrySize = 0, LineSmoothness = 0
+            },
+            new LineSeries<ObservablePoint>
+            {
+                Values = generatorPoints,
+                Name = $"{fileName} - Generator[%]",
+                GeometrySize = 0,
+                LineSmoothness = 0
+            }
+        };
+
+```
+
 
 ``` c# title="ErrorMessageService.cs"
  public class ErrorMessageService : IErrorMessageService
@@ -201,11 +272,12 @@ Die Anwendung verwendet Dependency Injection, um die Services und ViewModels zu 
 ``` 
 
 
-## Architektur
+## Architektur und Designmuster
 
-Die Anwendung folgt dem MVVM (Model-View-ViewModel) Architekturmuster, das eine klare Trennung zwischen der Benutzeroberfläche (Views) und der Geschäftslogik (ViewModels) ermöglicht. Services werden verwendet, um wiederverwendbare Logik und Funktionalitäten bereitzustellen, die von den ViewModels konsumiert werden.
+Die Anwendung folgt dem MVVM-Architekturmuster, das eine klare Trennung zwischen der Benutzeroberfläche (Views), der Geschäftslogik (ViewModels) und den Diensten (Services) gewährleistet. Diese Struktur fördert Wiederverwendbarkeit, Testbarkeit und Wartbarkeit. Dependency Injection spielt eine Schlüsselrolle in der Architektur, indem es das Management von Abhängigkeiten zwischen den Komponenten vereinfacht und ihre Kopplung reduziert.
+
 
 
 ## Navigation
 
-Die Navigation zwischen den verschiedenen Views wird durch das MainWindowViewModel gesteuert, das auf Benutzeraktionen reagiert und das CurrentPage-Property entsprechend aktualisiert.
+Die Navigation innerhalb der Anwendung wird durch das MainWindowViewModel gesteuert, das auf Benutzerinteraktionen reagiert und entsprechend das CurrentPage-Property aktualisiert. Ein Beispielcode-Snippet könnte zeigen, wie die Navigation zwischen verschiedenen Views umgesetzt wird, einschließlich der Verwendung von Commands und der Reaktion auf Benutzeraktionen.
