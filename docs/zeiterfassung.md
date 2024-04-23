@@ -7,3 +7,6 @@
 | 01.03.24 - 10.03.24 | 18 | Meeting, Graph-plot funktionalität, Tabellen-graph |
 | 11.03.24 - 21.03.24 | 11 | Tabelle-graph Erweiterungsfunktion, Löschfunktion, refactor |
 | 22.03.24 - 30.03.24 | 6 | Meeting Vorort, style updates, debugging |
+| 31.03.24 - 07.04.24 | 10 | Graphen aus Tabelle(multi) plotten, crosshair funktionalität, designanpassungen, |
+| 08.04.24 - 14.04.24 | 15 | Dynamische Löschung, live chart 2 Dokumenation,debugging |
+| 15.04.24 - 21.04.24 | 6 | Meeting, style updates, update view funktionalität, stehts renderer über ordnerhirarchie |
